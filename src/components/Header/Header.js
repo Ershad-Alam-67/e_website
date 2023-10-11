@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
+import MyContext from "../Context/MyContext"
 
-const Header = () => {
+const Header = (props) => {
+  const { cartElements } = useContext(MyContext)
+
   return (
     <div>
       <div className="bg-black z-10 w-full fixed top-0 left-0  text-white border-b-[1px] md:border-b-[2px] flex border-white font-serif">
@@ -10,10 +13,17 @@ const Header = () => {
           <button className="p-3 px-4 md:px-14 font-semibold">ABOUT</button>
         </div>
         <div className=" flex justify-end bg-black w-[30%] pr-5 items-center">
-          <button className="  border-2  px-2 rounded-md border-cyan-500">
+          <button
+            onClick={() => {
+              props.onHandleShowCart(true)
+            }}
+            className="  border-2  px-2 rounded-md border-cyan-500"
+          >
             cart
           </button>
-          <h1 className=" mb-5 pl-1 text-cyan-500 font-sans text-lg">0</h1>
+          <h1 className=" mb-5 pl-1 text-cyan-500 font-sans text-lg">
+            {cartElements.length}
+          </h1>
         </div>
       </div>
       <div className=" bg-zinc-500    pb-9 md:pb-10 md:text-[6rem] pt-12 font-serif text-white text-[3rem] ">

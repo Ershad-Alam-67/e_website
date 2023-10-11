@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import MyContext from "../Context/MyContext"
 
 const Store = () => {
-  const productsArr = useContext(MyContext)
+  const { productsArr } = useContext(MyContext)
 
   return (
     <div className=" ">
