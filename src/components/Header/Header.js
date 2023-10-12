@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import MyContext from "../Context/MyContext"
 
 const Header = (props) => {
-  const { cartElements } = useContext(MyContext)
+  const { cartItems } = useContext(MyContext)
 
   return (
     <div>
@@ -22,7 +22,7 @@ const Header = (props) => {
             cart
           </button>
           <h1 className=" mb-5 pl-1 text-cyan-500 font-sans text-lg">
-            {cartElements.length}
+            {cartItems.length}
           </h1>
         </div>
       </div>

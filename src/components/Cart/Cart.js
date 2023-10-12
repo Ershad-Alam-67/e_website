@@ -5,14 +5,14 @@ import pic from "../assets/pic.png"
 
 const Cart = (props) => {
   const [total, setTotal] = useState(0)
-  const { cartElements } = useContext(MyContext)
+  const { cartItems } = useContext(MyContext)
   useEffect(() => {
     let tot = 0
-    cartElements.forEach((element) => {
+    cartItems.forEach((element) => {
       tot = tot + parseInt(element.price) * parseInt(element.quantity)
     })
     setTotal(tot)
-  }, [cartElements])
+  }, [cartItems])
   return (
     <div className="top-16 overflow-y-scroll max-h-[85%]  fixed w-full md:w-[38%] bg-white pb-4  right-0">
       <div className=" flex h-max  w-full justify-between items-start">
@@ -40,7 +40,7 @@ const Cart = (props) => {
         </h1>
       </div>
       <div className=" ">
-        {cartElements.map((item) => (
+        {cartItems.map((item) => (
           <div className=" flex  justify-around ">
             <div className=" border-b-[1px] border-black pb-2 ml-[2%]   w-[35%] flex flex-wrap  px-4 p-1 pt-3">
               <img src={item.imageUrl} className=" w-[50%] h-16 rounded-md" />

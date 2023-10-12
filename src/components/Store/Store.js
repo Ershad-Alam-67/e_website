@@ -2,7 +2,15 @@ import React, { useContext } from "react"
 import MyContext from "../Context/MyContext"
 
 const Store = () => {
-  const { productsArr } = useContext(MyContext)
+  const { productsArr, cartItems, addItem } = useContext(MyContext)
+  const addToCart = (itemm) => {
+    const checkItem = cartItems.find((item) => item.title === itemm.title)
+    if (checkItem) {
+      alert("The item is already added to the cart")
+    } else {
+      addItem({ ...itemm, quantity: 1 })
+    }
+  }
 
   return (
     <div className=" ">
@@ -27,7 +35,12 @@ const Store = () => {
               <h1 className=" flex items-center font-semibold  ">
                 {"$" + item.price}
               </h1>
-              <button className=" bg-black p-1 px-3 rounded font-semibold shadow-md shadow-black  drop-shadow-xl text-white ">
+              <button
+                onClick={() => {
+                  addToCart(item)
+                }}
+                className=" bg-black p-1 px-3 rounded font-semibold shadow-md shadow-black  drop-shadow-xl text-white "
+              >
                 Add To Cart
               </button>
             </div>

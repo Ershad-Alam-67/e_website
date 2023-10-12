@@ -1,40 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import MyContext from "./MyContext"
 const DataProvider = (props) => {
-  const cartElements = [
-    {
-      title: "Colors",
+  const [cartItems, setCartItems] = useState([])
 
-      price: 100,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-
-      quantity: 2,
-    },
-
-    {
-      title: "Black and white Colors",
-
-      price: 50,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-      quantity: 3,
-    },
-
-    {
-      title: "Yellow and Black Colors",
-
-      price: 70,
-
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-      quantity: 1,
-    },
-  ]
+  const addItem = (item) => {
+    setCartItems((pre) => {
+      return [...pre, item]
+    })
+  }
 
   const productsArr = [
     {
@@ -75,7 +48,7 @@ const DataProvider = (props) => {
   ]
 
   return (
-    <MyContext.Provider value={{ productsArr, cartElements }}>
+    <MyContext.Provider value={{ productsArr, cartItems, addItem }}>
       {props.children}
     </MyContext.Provider>
   )
