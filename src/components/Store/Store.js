@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import MyContext from "../Context/MyContext"
 
-const Store = () => {
+const Store = (props) => {
   const { productsArr, cartItems, addItem } = useContext(MyContext)
   const addToCart = (itemm) => {
     const checkItem = cartItems.find((item) => item.title === itemm.title)
@@ -47,7 +47,12 @@ const Store = () => {
           </div>
         ))}
         <div className=" flex justify-center p-5 w-full">
-          <button className="  bg-green-500 p-2 px-8 rounded font-semibold shadow-md shadow-black  drop-shadow-xl text-white ">
+          <button
+            onClick={() => {
+              props.onHandleShowCart(true)
+            }}
+            className="  bg-green-500 p-2 px-8 rounded font-semibold shadow-md shadow-black  drop-shadow-xl text-white "
+          >
             Go To Cart
           </button>
         </div>

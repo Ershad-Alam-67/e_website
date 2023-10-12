@@ -19,7 +19,7 @@ function App() {
     <div className="App ">
       <DataProvider>
         <Header onHandleShowCart={handleShowCart} calledFrom="root"></Header>
-        <Store></Store>
+        <Store onHandleShowCart={handleShowCart}></Store>
         <Footer></Footer>
         <MyPortal>
           {showCart && <Cart onHandleShowCart={handleShowCart}></Cart>}

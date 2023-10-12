@@ -1,3 +1,9 @@
 .custom-transition {
   transition-duration: 1000ms; /* Change this value to your desired duration */
 }
+body,
+div,
+Header {
+  margin: 0;
+  padding: 0;
+}

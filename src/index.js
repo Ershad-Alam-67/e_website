@@ -5,12 +5,17 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import About from "./components/About/About"
+import Home from "./components/Home/Home"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   {
     path: "/about",
     element: <About />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
 ])
 root.render(
