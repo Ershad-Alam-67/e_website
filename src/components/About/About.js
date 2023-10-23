@@ -2,12 +2,12 @@ import React from "react"
 import Header from "../Header/Header"
 import DataProvider from "../Context/DataProvider"
 import pic from "../assets/band.png"
-import Footer from "../Footer/Footer"
+import Headline from "../Header/Headline"
 
 const About = () => {
   return (
     <DataProvider>
-      <Header clledFrom="about"></Header>
+      <Headline></Headline>
       <div className="p-2 ">
         <h1 className="p-7 text-center font-creepster text-3xl">ABOUT</h1>
         <div className="flex justify-center">
@@ -37,7 +37,6 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </DataProvider>
   )
 }

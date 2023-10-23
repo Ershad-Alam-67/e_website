@@ -2,6 +2,7 @@ import React from "react"
 import Header from "../Header/Header"
 import DataProvider from "../Context/DataProvider"
 import Footer from "../Footer/Footer"
+import Headline from "../Header/Headline"
 const randomToursData = [
   {
     date: "JUL 11",
@@ -28,7 +29,7 @@ const randomToursData = [
 const Home = () => {
   return (
     <DataProvider>
-      <Header></Header>
+      <Headline></Headline>
       <div className="h-[30%] bg-zinc-500">
         <h1 className="text-center w-fit text-white md:text-3xl text-xl ml-20 md:ml-[38%] border-[1px] p-3 border-cyan-400">
           Get Our Latest Album
@@ -61,7 +62,6 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <Footer></Footer>
     </DataProvider>
   )
 }

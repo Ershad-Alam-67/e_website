@@ -5,7 +5,7 @@ import pic from "../assets/pic.png"
 
 const Cart = (props) => {
   const [total, setTotal] = useState(0)
-  const { cartItems } = useContext(MyContext)
+  const { cartItems, setCartItems } = useContext(MyContext)
   useEffect(() => {
     let tot = 0
     cartItems.forEach((element) => {
@@ -13,14 +13,18 @@ const Cart = (props) => {
     })
     setTotal(tot)
   }, [cartItems])
+  const removeItem = (a) => {
+    const updatedCart = cartItems.filter((item) => item.title != a)
+    setCartItems(updatedCart)
+  }
   return (
-    <div className="top-16 overflow-y-scroll max-h-[85%]  fixed w-full md:w-[38%] bg-white pb-4  right-0">
+    <div className="top-16 overflow-y-scroll rounded-md max-h-[85%]  fixed w-full md:w-[38%] bg-white pb-4  right-0">
       <div className=" flex h-max  w-full justify-between items-start">
         <h1 className="pt-8 font-creepster text-3xl pl-[43%] ">CART</h1>
         <div className="pr-4">
           <button
             onClick={() => {
-              props.onHandleShowCart(false)
+              props.cartHandler(false)
             }}
             className=" border-[2px] mt-1 px-2 rounded-lg text-gray-500 font-bold text-xl"
           >
@@ -43,7 +47,10 @@ const Cart = (props) => {
         {cartItems.map((item) => (
           <div className=" flex  justify-around ">
             <div className=" border-b-[1px] border-black pb-2 ml-[2%]   w-[35%] flex flex-wrap  px-4 p-1 pt-3">
-              <img src={item.imageUrl} className=" w-[50%] h-16 rounded-md" />
+              <img
+                src={item.imageUrl[0]}
+                className=" w-[50%] h-16 rounded-md"
+              />
               <h1 className="pl-2 overflow-ellipsis w-[50%] break-words">
                 {item.title}
               </h1>
@@ -55,7 +62,12 @@ const Cart = (props) => {
               <h1 className="  px-2 py-1 border border-black ">
                 {item.quantity}
               </h1>
-              <button className=" bg-black text-white text-sm rounded shadow-xl mr-1 px-3 py-1  ">
+              <button
+                className=" bg-black text-white text-sm rounded shadow-xl mr-1 px-3 py-1  "
+                onClick={() => {
+                  removeItem(item.title)
+                }}
+              >
                 REMOVE
               </button>
             </div>
