@@ -77,9 +77,9 @@ const LoginPage = () => {
     }
   }
   return (
-    <div>
+    <div className="">
       <Headline></Headline>
-      <div className=" flex justify-center ">
+      <div className=" flex justify-center mt-2 ">
         <div className=" bg-slate-600 w-[35%] rounded-md p-2  ">
           <label htmlFor="email" className=" text-white px-1  ">
             Email

@@ -3,6 +3,9 @@ import Header from "../Header/Header"
 import DataProvider from "../Context/DataProvider"
 import Footer from "../Footer/Footer"
 import Headline from "../Header/Headline"
+import { Redirect } from "react-router-dom"
+import { useContext } from "react"
+import MyContext from "../Context/MyContext"
 const randomToursData = [
   {
     date: "JUL 11",
@@ -27,6 +30,10 @@ const randomToursData = [
 ]
 
 const Home = () => {
+  const { isLogIn } = useContext(MyContext)
+  if (!isLogIn) {
+    return <Redirect to="/login"></Redirect>
+  }
   return (
     <DataProvider>
       <Headline></Headline>

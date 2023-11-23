@@ -1,10 +1,13 @@
 import React, { useContext } from "react"
 import MyContext from "../Context/MyContext"
-import { NavLink } from "react-router-dom"
+import { NavLink, Redirect } from "react-router-dom"
 import Headline from "../Header/Headline"
 
 const Store = (props) => {
-  const { productsArr, cartItems, addItem } = useContext(MyContext)
+  const { productsArr, cartItems, addItem, isLogIn } = useContext(MyContext)
+  if (!isLogIn) {
+    return <Redirect to="/login"></Redirect>
+  }
 
   const addToCart = (itemm) => {
     const checkItem = cartItems.find((item) => item.title === itemm.title)

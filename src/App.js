@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Route, Switch } from "react-router-dom"
 import Header from "./components/Header/Header"
 import Store from "./components/Store/Store"
@@ -11,8 +11,10 @@ import MyPortal from "./components/Portal/MyPortal"
 import Cart from "./components/Cart/Cart"
 import Product from "./components/Products/Product"
 import LoginPage from "./components/Login/LoginPage"
+import MyContext from "./components/Context/MyContext"
 
 function App() {
+  const { isLogIn } = useContext(MyContext)
   const [productID, setProductID] = useState("ini")
   const productIDHandler = (id) => {
     setProductID(id)
@@ -21,41 +23,40 @@ function App() {
   const handleShowCart = (a) => {
     setShowCart(a)
   }
+  console.log(isLogIn)
   return (
     <div className="App ">
-      <DataProvider>
-        <Header cartHandler={handleShowCart} />
-        <MyPortal>
-          {showCart && <Cart cartHandler={handleShowCart}></Cart>}
-        </MyPortal>
-        <Switch>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route exact path="/">
-            <Store
-              productIDHandler={productIDHandler}
-              cartHandler={handleShowCart}
-            />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/products">
-            <Product
-              productIDHandler={productIDHandler}
-              productID={productID}
-            ></Product>
-          </Route>
-          <Route path="/login">
-            <LoginPage></LoginPage>
-          </Route>
-        </Switch>
-        <Footer />
-      </DataProvider>
+      <Header cartHandler={handleShowCart} />
+      <MyPortal>
+        {showCart && <Cart cartHandler={handleShowCart}></Cart>}
+      </MyPortal>
+      <Switch>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route exact path="/">
+          <Store
+            productIDHandler={productIDHandler}
+            cartHandler={handleShowCart}
+          />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/products">
+          <Product
+            productIDHandler={productIDHandler}
+            productID={productID}
+          ></Product>
+        </Route>
+        <Route path="/login">
+          <LoginPage></LoginPage>
+        </Route>
+      </Switch>
+      <Footer />
     </div>
   )
 }

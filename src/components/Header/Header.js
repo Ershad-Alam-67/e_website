@@ -3,8 +3,12 @@ import MyContext from "../Context/MyContext"
 import { NavLink } from "react-router-dom"
 
 const Header = (props) => {
-  const { cartItems, isLogIn } = useContext(MyContext)
+  const { cartItems, isLogIn, setIsLogIn, setToken } = useContext(MyContext)
   console.log(isLogIn)
+  const logoutHandler = () => {
+    setIsLogIn(false)
+    setToken("")
+  }
 
   return (
     <div className="  border-0">
@@ -40,14 +44,21 @@ const Header = (props) => {
           >
             CONTACT
           </NavLink>
-          <NavLink
-            activeClassName=" underline"
-            exact
-            to="/login"
-            className="p-3 text-sm px-2  md:text-base md:px-14 font-semibold"
-          >
-            {isLogIn ? "LOGOUT" : "LOGIN"}
-          </NavLink>
+          {!isLogIn && (
+            <NavLink
+              activeClassName=" underline"
+              exact
+              to="/login"
+              className="p-3 text-sm px-2  md:text-base md:px-14 font-semibold"
+            >
+              LOGIN
+            </NavLink>
+          )}
+          {isLogIn && (
+            <button onClick={logoutHandler} className="  py-0 px-3 pt-0 pb-0  ">
+              Logout
+            </button>
+          )}
         </div>
 
         <div className=" flex justify-center bg-black w-[20%] pr-1 items-center">
