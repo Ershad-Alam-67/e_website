@@ -10,6 +10,7 @@ import Contact from "./pages/Contact"
 import MyPortal from "./components/Portal/MyPortal"
 import Cart from "./components/Cart/Cart"
 import Product from "./components/Products/Product"
+import LoginPage from "./components/Login/LoginPage"
 
 function App() {
   const [productID, setProductID] = useState("ini")
@@ -48,6 +49,9 @@ function App() {
               productIDHandler={productIDHandler}
               productID={productID}
             ></Product>
+          </Route>
+          <Route path="/login">
+            <LoginPage></LoginPage>
           </Route>
         </Switch>
         <Footer />

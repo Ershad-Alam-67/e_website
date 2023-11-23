@@ -3,7 +3,8 @@ import MyContext from "../Context/MyContext"
 import { NavLink } from "react-router-dom"
 
 const Header = (props) => {
-  const { cartItems } = useContext(MyContext)
+  const { cartItems, isLogIn } = useContext(MyContext)
+  console.log(isLogIn)
 
   return (
     <div className="  border-0">
@@ -38,6 +39,14 @@ const Header = (props) => {
             className="p-3 text-sm px-2  md:text-base md:px-14 font-semibold"
           >
             CONTACT
+          </NavLink>
+          <NavLink
+            activeClassName=" underline"
+            exact
+            to="/login"
+            className="p-3 text-sm px-2  md:text-base md:px-14 font-semibold"
+          >
+            {isLogIn ? "LOGOUT" : "LOGIN"}
           </NavLink>
         </div>
 

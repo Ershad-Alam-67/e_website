@@ -3,6 +3,7 @@ import Header from "../Header/Header"
 import DataProvider from "../Context/DataProvider"
 import pic from "../assets/band.png"
 import Headline from "../Header/Headline"
+import LoginPage from "../Login/LoginPage"
 
 const About = () => {
   return (

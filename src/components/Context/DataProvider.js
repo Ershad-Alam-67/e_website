@@ -1,15 +1,21 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import MyContext from "./MyContext"
 
 const DataProvider = (props) => {
+  const storedInfo = JSON.parse(localStorage.getItem("user")) || ""
   const [cartItems, setCartItems] = useState([])
+  const [isLogIn, setIsLogIn] = useState(storedInfo.isLogIn || false)
+  const [token, setToken] = useState(storedInfo.token || "")
 
   const addItem = (item) => {
     setCartItems((pre) => {
       return [...pre, item]
     })
   }
-
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify({ isLogIn, token }))
+  }, [isLogIn, token])
+  console.log(isLogIn)
   const productsArr = [
     {
       id: "p1",
@@ -75,7 +81,15 @@ const DataProvider = (props) => {
 
   return (
     <MyContext.Provider
-      value={{ productsArr, cartItems, addItem, setCartItems }}
+      value={{
+        productsArr,
+        cartItems,
+        addItem,
+        setCartItems,
+        setIsLogIn,
+        setToken,
+        isLogIn,
+      }}
     >
       {props.children}
     </MyContext.Provider>
