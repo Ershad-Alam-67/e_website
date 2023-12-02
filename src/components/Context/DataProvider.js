@@ -3,18 +3,111 @@ import MyContext from "./MyContext"
 
 const DataProvider = (props) => {
   const storedInfo = JSON.parse(localStorage.getItem("user")) || ""
+
   const [cartItems, setCartItems] = useState([])
   const [isLogIn, setIsLogIn] = useState(storedInfo.isLogIn || false)
   const [token, setToken] = useState(storedInfo.token || "")
+  const [email, setEmail] = useState(storedInfo.email || "")
+  useEffect(() => {
+    if (isLogIn) {
+      fetch(
+        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          }
+        })
+        .then((data) => {
+          setCartItems(data)
+        })
+    }
+    console.log(email)
+  }, [email, isLogIn])
 
   const addItem = (item) => {
+    console.log(item)
+    const foundItem = cartItems.find((itemm) => itemm.id === item.id)
     setCartItems((pre) => {
+      if (foundItem) {
+        const updatedCart = cartItems.map((item) => {
+          if (item === foundItem)
+            return { ...item, quantity: foundItem.quantity + 1 }
+          return item
+        })
+        return updatedCart
+      }
       return [...pre, item]
     })
+    if (foundItem) {
+      console.log("fi")
+      fetch(
+        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          }
+        })
+        .then((data) => {
+          const foundItemInApi = data.find((itemm) => itemm.id === item.id)
+          console.log(foundItemInApi)
+          if (foundItemInApi) {
+            console.log(foundItemInApi._id)
+            fetch(
+              `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}/${foundItemInApi._id}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  id: foundItemInApi.id,
+                  price: foundItemInApi.price,
+                  quantity: foundItemInApi.quantity + 1,
+                  title: foundItemInApi.title,
+                  imageUrl: foundItemInApi.imageUrl,
+                }),
+              }
+            ).then((res) => {
+              if (res.ok) {
+                console.log(res)
+              }
+            })
+          }
+        })
+    } else {
+      fetch(
+        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`,
+        {
+          method: "POST",
+          body: JSON.stringify(item),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          }
+        })
+        .then((data) => {
+          console.log(data)
+        })
+    }
   }
+
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify({ isLogIn, token }))
-  }, [isLogIn, token])
+    localStorage.setItem("user", JSON.stringify({ isLogIn, token, email }))
+  }, [isLogIn, token, email])
+  useEffect(() => {
+    console.log("useeffect called")
+    if (!isLogIn) {
+      setCartItems([])
+      console.log("if called")
+    }
+  }, [isLogIn])
   console.log(isLogIn)
   const productsArr = [
     {
@@ -89,6 +182,8 @@ const DataProvider = (props) => {
         setIsLogIn,
         setToken,
         isLogIn,
+        setEmail,
+        email,
       }}
     >
       {props.children}

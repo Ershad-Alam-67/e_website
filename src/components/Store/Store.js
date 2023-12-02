@@ -10,12 +10,9 @@ const Store = (props) => {
   }
 
   const addToCart = (itemm) => {
-    const checkItem = cartItems.find((item) => item.title === itemm.title)
-    if (checkItem) {
-      alert("The item is already added to the cart")
-    } else {
-      addItem({ ...itemm, quantity: 1 })
-    }
+    const checkItem = cartItems.find((item) => item.id === itemm.id)
+
+    addItem({ ...itemm, quantity: 1 })
   }
 
   return (

@@ -3,7 +3,7 @@ import MyContext from "../Context/MyContext"
 import { useEffect, useState, useRef, useContext } from "react"
 import Headline from "../Header/Headline"
 const LoginPage = () => {
-  const { setIsLogIn, setToken } = useContext(MyContext)
+  const { setIsLogIn, setToken, setEmail } = useContext(MyContext)
   const emailRef = useRef()
   const passwordRef = useRef()
   const fun = () => {
@@ -41,6 +41,12 @@ const LoginPage = () => {
           }
         })
         .then((data) => {
+          const email = data.email
+
+          const alphanumericPart = email.replace(/[@.]/g, "")
+
+          setEmail(alphanumericPart)
+
           setIsLogIn(true)
         })
     } else {
@@ -67,6 +73,11 @@ const LoginPage = () => {
           }
         })
         .then((data) => {
+          const email = data.email
+
+          const alphanumericPart = email.replace(/[@.]/g, "")
+
+          setEmail(alphanumericPart)
           setToken(data.idToken)
           setIsLogIn(true)
           console.log(data)

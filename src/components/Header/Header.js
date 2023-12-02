@@ -3,11 +3,20 @@ import MyContext from "../Context/MyContext"
 import { NavLink } from "react-router-dom"
 
 const Header = (props) => {
-  const { cartItems, isLogIn, setIsLogIn, setToken } = useContext(MyContext)
+  const { cartItems, isLogIn, setIsLogIn, setToken, setCartItems } =
+    useContext(MyContext)
   console.log(isLogIn)
   const logoutHandler = () => {
     setIsLogIn(false)
     setToken("")
+    setCartItems([])
+  }
+  const totalitems = () => {
+    let tot = 0
+    cartItems.forEach((element) => {
+      tot = tot + parseInt(element.quantity)
+    })
+    return tot
   }
 
   return (
@@ -71,7 +80,7 @@ const Header = (props) => {
             cart
           </button>
           <h1 className=" mb-5 pl-1 text-cyan-500 font-sans text-lg">
-            {cartItems.length}
+            {totalitems()}
           </h1>
         </div>
       </div>
