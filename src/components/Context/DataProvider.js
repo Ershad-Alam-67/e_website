@@ -11,7 +11,7 @@ const DataProvider = (props) => {
   useEffect(() => {
     if (isLogIn) {
       fetch(
-        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`
+        `https://crudcrud.com/api/a8035611804c44f2beb81dd6a51076fd/${email}`
       )
         .then((res) => {
           if (res.ok) {
@@ -42,7 +42,7 @@ const DataProvider = (props) => {
     if (foundItem) {
       console.log("fi")
       fetch(
-        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`
+        `https://crudcrud.com/api/a8035611804c44f2beb81dd6a51076fd/${email}`
       )
         .then((res) => {
           if (res.ok) {
@@ -55,7 +55,7 @@ const DataProvider = (props) => {
           if (foundItemInApi) {
             console.log(foundItemInApi._id)
             fetch(
-              `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}/${foundItemInApi._id}`,
+              `https://crudcrud.com/api/a8035611804c44f2beb81dd6a51076fd/${email}/${foundItemInApi._id}`,
               {
                 method: "PUT",
                 headers: {
@@ -78,7 +78,7 @@ const DataProvider = (props) => {
         })
     } else {
       fetch(
-        `https://crudcrud.com/api/c35531798a0f4b77bbbfa6993ddf2866/${email}`,
+        `https://crudcrud.com/api/a8035611804c44f2beb81dd6a51076fd/${email}`,
         {
           method: "POST",
           body: JSON.stringify(item),
